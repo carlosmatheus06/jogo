@@ -54,11 +54,12 @@ public class JogoController {
     @RequestMapping(value = "/update", method = RequestMethod.POST)
     public String update(
         @RequestParam("id") int id,
-        @RequestParam("titulo") String titulo,
+        @RequestParam("titulo") String titulo
     ) {
         Optional<Jogo> jogo = jogoRepo.findById(id);
 
         if(jogo.isPresent()) {
+            jogo.get().setId(id);
             jogo.get().setTitulo(titulo);
 
             jogoRepo.save(jogo.get());
